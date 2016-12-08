@@ -19,15 +19,16 @@ namespace LinqExercises.Controllers
         [HttpGet, Route("api/categories"), ResponseType(typeof(IQueryable<Category>))]
         public IHttpActionResult GetAll()
         {
-            throw new NotImplementedException("Write a query to return all categories");
-        }
+            return Ok(_db.Categories);       
+                }
 
         //GET: /api/categories/search?term={term}
         [HttpGet, Route("api/categories/search"), ResponseType(typeof(IQueryable<Category>))]
         public IHttpActionResult Search(string term)
         {
-            throw new NotImplementedException("Write a query to return all categories where the category name contains the search term.");
-        }
+            var resultSet = _db.Categories.Where(c => c.CategoryName.Contains(term));
+                return Ok(resultSet);
+                }
 
         protected override void Dispose(bool disposing)
         {
